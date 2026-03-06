@@ -51,12 +51,7 @@ model = genai.GenerativeModel(MODEL_NAME)
 @app.route("lorel/api/ai", methods=["POST"])
 def generate():
     data = request.json or {}
-    user_prompt = data.get("prompt", "")
-    if not user_prompt:
-        return jsonify({"error": "Prompt mancante"}), 400
-
     logging.info("Nuova richiesta generazione")
-
     system_prompt = f"""
 
 
