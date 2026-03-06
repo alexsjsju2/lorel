@@ -14,7 +14,7 @@ logging.basicConfig(level=logging.INFO)
 if api_key:
     genai.configure(api_key=api_key)
 else:
-    logging.warning("GEMINI_API_KEY non trovata.")
+    logging.warning("GEMINI_API_KEY_2 non trovata.")
 
 def get_available_model(preferred_version='2.5-flash'):
     fallback_models = [
@@ -48,7 +48,7 @@ MODEL_NAME = get_available_model()
 logging.info(f"Uso modello: {MODEL_NAME}")
 model = genai.GenerativeModel(MODEL_NAME)
 
-@app.route("/api/generate", methods=["POST"])
+@app.route("lorel/api/ai", methods=["POST"])
 def generate():
     data = request.json or {}
     user_prompt = data.get("prompt", "")
@@ -58,21 +58,10 @@ def generate():
     logging.info("Nuova richiesta generazione")
 
     system_prompt = f"""
-Sei un AI senior web developer.
 
-REQUISITI:
 
-- codice pronto da copiare/incollare
-- minimizza tutto il css per risparmiare righe
-- evita ```html```
-- design moderno, responsive, mobile-friendly
-- dark/light mode
-- non restituire JSON, no commenti inutili
-- nessuna spiegazione, solo codice
-- il css, js, html deve stare in un unico index, Nessun file esterno.
 
-Richiesta utente:
-{user_prompt}
+
 """
 
     try:
